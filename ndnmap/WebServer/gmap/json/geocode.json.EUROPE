@@ -1,0 +1,256 @@
+{
+    "UA": {
+        "name": "The University of Arizona",
+        "shortname": "UA",
+        "site": "http://hobo.cs.arizona.edu:9695/",
+        "backbone": false,
+        "position": [ 32.22896140, -110.94832260 ]
+    },
+    "SPP-ATLA": {
+        "name": "Atlanta SPP Node",
+        "shortname": "SPP-ATLA",
+        "site": "http://sppatla1.arl.wustl.edu:9695/",
+        "backbone": true,
+        "position": [ 33.74899540, -84.38798240 ]
+    },
+    "CSU": {
+        "name": "Colorado State University",
+        "shortname": "CSU",
+        "site": "http://mccoy.netsec.colostate.edu:9695/",
+        "backbone": false,
+        "position": [ 40.57471750, -105.08482930 ]
+    },
+    "SPP-KANS": {
+        "name": "Kansas City SPP Node",
+        "shortname": "SPP-KANS",
+        "site": "http://sppkans1.arl.wustl.edu:9695/",
+        "backbone": true,
+        "position": [ 39.09972650, -94.57856670 ]
+    },
+    "SPP-HOUS": {
+        "name": "Houston SPP Node",
+        "shortname": "SPP-HOUS",
+        "site": "http://spphous1.arl.wustl.edu:9695/",
+        "backbone": true,
+        "position": [ 29.76019270, -95.36938959999999 ]
+    },
+    "UM": {
+        "name": "University of Memphis",
+        "shortname": "UM",
+        "site": "http://netlogic.cs.memphis.edu:9695/",
+        "backbone": false,
+        "position": [ 35.11860990, -89.93700109999999 ]
+    },
+    "NEU": {
+        "name": "Northeastern University",
+        "shortname": "NEU",
+        "site": "",
+        "backbone": false,        
+        "position": [ 42.33987830, -71.08873579999999 ]
+    },
+    "PARC": {
+        "name": "Palo Alto Research Center (PARC)",
+        "shortname": "PARC",
+        "site": "http://ccngw.parc.xerox.com:9695/",
+        "backbone": false,
+        "position": [ 37.40213770, -122.14807210 ]
+    },
+    "SPP-SALT": {
+        "name": "Salt Lake City",
+        "shortname": "SPP-SALT",
+        "site": "http://sppsalt1.arl.wustl.edu:9695/",
+        "description": "Salt Lake City SPP Node",
+        "backbone": true,
+        "position": [ 39.76077930, -111.89104740 ]
+    },
+    "UCI": {
+        "name": "University of California Irvine",
+        "shortname": "UCI",
+        "site": "http://ndnhub.ics.uci.edu:9695/",
+        "backbone": false,
+        "_real_position": [ 33.6649250, -117.8537750 ],
+        "position": [ 34.4, -117.6 ]
+    },
+    "UIUC": {
+        "name": "University of Illinois, Urbana-Champaign",
+        "shortname": "UIUC",
+        "site": "http://ndn.cs.illinois.edu:9695/",
+        "backbone": false,
+        "_real_position": [ 40.10260390, -88.23171080000002 ],
+        "position": [ 40.60260390, -88.23171080000002 ]
+    },
+    "UCLA": {
+        "name": "University of California, Los Angeles",
+        "shortname": "UCLA",
+        "site": "http://spurs.cs.ucla.edu:9695/",
+        "backbone": false,
+        "_real_position": [ 34.07282250, -118.43873980 ],
+        "position": [ 35.5, -120 ]
+    },
+    "REMAP": {
+        "name": "Remap at University of California, Los Angeles",
+        "shortname": "REMAP",
+        "site": "http://borges.metwi.ucla.edu:9695/",
+        "backbone": false,
+        "_real_position": [ 34.07282250, -118.43873980 ],
+        "position": [ 34.4, -122.14807210 ]
+    },
+    "UCSD": {
+        "name": "University of California San Diego",
+        "shortname": "CAIDA/UCSD",
+        "site": "http://ccnhub.caida.org:9695/",
+        "backbone": false,
+        "position": [ 32.87357720, -117.23781110 ]
+    },
+    "SPP-WASH": {
+        "name": "Washington DC SPP Node",
+        "shortname": "SPP-WASH",
+        "site": "http://sppwash1.arl.wustl.edu:9695/",
+        "backbone": true,
+        "position": [ 38.89511180, -77.03636580 ]
+    },
+    "WashU": {
+        "name": "Washington University in St. Louis",
+        "shortname": "WashU",
+        "site": "http://128.252.153.193:9695/",
+        "backbone": false,
+        "_real_position": [ 38.64907010, -90.30334710 ],
+        "position": [ 38.14907010, -90.30334710 ]
+    },
+    "ATHENS": {
+        "name": "Athens Greece",
+        "shortname": "Athens",
+        "site": "http://www.greece-athens.com/",
+        "backbone": false,
+        "position": [ 37.58, 23.43 ]
+    },
+    "BARCELONA": {
+        "name": "Barcelona Spain",
+        "shortname": "Barcelona",
+        "site": "http://www.bcn.cat/en/ihome.htm",
+        "backbone": false,
+        "_real_position": [ 41.23, 2.9 ],
+        "position": [ 41.23, 2.9 ]
+    },
+    "BERLIN": {
+        "name": "Berlin Germany",
+        "shortname": "Berlin",
+        "site": "http://www.berlin.de/international/index.en.php/",
+        "backbone": false,
+        "_real_position": [ 52.30, 13.25 ],
+        "position": [ 52.30, 13.25 ]
+    },
+    "BERN": {
+        "name": "Bern Switzerland",
+        "shortname": "Bern",
+        "site": "http://www.unibe.ch/eng",
+        "backbone": false,
+        "_real_position": [ 46.57, 7.27 ],
+        "position": [ 46.57, 7.27 ]
+    },
+    "BRUSSELS": {
+        "name": "Brussels Belgium",
+        "shortname": "Brussels",
+        "site": "http://www.brussels.be/",
+        "backbone": false,
+        "_real_position": [ 50.52, 4.22 ],
+        "position": [ 50.52, 4.22 ]
+    },
+    "COPENHAGEN": {
+        "name": "Copenhagen Denmark",
+        "shortname": "Copenhagen",
+        "site": "http://www.visitcopenhagen.com//",
+        "backbone": false,
+        "_real_position": [ 55.40, 12.34 ],
+        "position": [ 55.40, 12.34 ]
+    },
+    "DELFT": {
+        "name": "Delft Netherlands",
+        "shortname": "Delft",
+        "site": "http://home.tudelft.nl/en/",
+        "backbone": false,
+        "_real_position": [ 52.0, 4.21 ],
+        "position": [ 52.0, 4.21 ]
+    },
+    "HELSINKI": {
+        "name": "Helsinki Finland",
+        "shortname": "Helsinki",
+        "site": "http://www.hel.fi/hki/Helsinki/en/Etusivu/",
+        "backbone": false,
+        "_real_position": [ 60.10, 25.0 ],
+        "position": [ 60.10, 25.0 ]
+    },
+    "LISBON": {
+        "name": "Lisbon Portugal",
+        "shortname": "Lisbon",
+        "site": "http://www.golisbon.com/",
+        "backbone": false,
+        "_real_position": [ 38.44, -9.9 ],
+        "position": [ 38.44, -9.9 ]
+    },
+    "LONDON": {
+        "name": "London England",
+        "shortname": "London",
+        "site": "http://www.visitlondon.com/",
+        "backbone": false,
+        "_real_position": [ 51.32, -0.5 ],
+        "position": [ 51.32, -0.5 ]
+    },
+    "MADRID": {
+        "name": "Madrid Spain",
+        "shortname": "Madrid",
+        "site": "http://www.esmadrid.com/",
+        "backbone": false,
+        "_real_position": [ 40.26, -3.42 ],
+        "position": [ 40.26, -3.42 ]
+    },
+    "MOSCOW": {
+        "name": "Moscow Russia",
+        "shortname": "Moscow",
+        "site": "http://www.themoscowtimes.com/",
+        "backbone": false,
+        "_real_position": [ 55.45, 37.36 ],
+        "position": [ 55.45, 37.36 ]
+    },
+    "PARIS": {
+        "name": "Paris France",
+        "shortname": "Paris",
+        "site": "http://www.paris.fr/english",
+        "backbone": false,
+        "_real_position": [ 48.48, 2.20 ],
+        "position": [ 48.48, 2.20 ]
+    },
+    "ROME": {
+        "name": "Rome Italy",
+        "shortname": "Rome",
+        "site": "http://www.enjoyrome.com/",
+        "backbone": false,
+        "_real_position": [ 41.54, 12.27 ],
+        "position": [ 41.54, 12.27 ]
+    },
+    "STOCKHOLM": {
+        "name": "Stockholm Sweden",
+        "shortname": "Stockholm",
+        "site": "http://www.visitstockholm.com/en/",
+        "backbone": false,
+        "_real_position": [ 59.17, 18.3 ],
+        "position": [ 59.17, 18.3 ]
+    },
+    "UPPSALA": {
+        "name": "Uppsala Sweden",
+        "shortname": "Uppsala",
+        "site": "http://www.uu.se/en//",
+        "backbone": false,
+        "_real_position": [ 59.51, 17.38 ],
+        "position": [ 59.51, 17.38 ]
+    },
+    "WARSAW": {
+        "name": "Warsaw Poland",
+        "shortname": "Warsaw",
+        "site": "http://www.um.warszawa.pl/en",
+        "backbone": false,
+        "_real_position": [ 52.14, 21.0 ],
+        "position": [ 52.14, 21.0 ]
+    }
+
+}

@@ -1,0 +1,400 @@
+<!--
+Copyright (c) 2012 Shakir James and Washington University in St. Louis.
+See LICENSE for details.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+            <style type="text/css">
+            html { height: 100% }
+            body { height: 100%; margin: 0; padding: 0; font-family: 'Arial'; font-size:80%; }
+            #map_canvas { height: 100% }
+            .info-content { min-width: 210px; min-height:210px;}
+            .link-chart { min-width:200px; min-height:63px; background:url({{ STATIC_URL }}img/loader.gif) no-repeat 50% 20%;}
+      #legend {
+        background: #FFF;
+        padding: 10px;
+        margin: 5px;
+        font-size: 12px;
+        font-family: Arial, sans-serif;
+      }
+
+      .color {
+        border: 1px solid;
+        height: 12px;
+        width: 12px;
+        margin-right: 3px;
+        float: left;
+      }
+
+      .red {
+        background: #FF0000;
+      }
+
+      .orange {
+        background: #FFA500;
+      }
+
+      .darkblue {
+        background: #0000A0;
+      }
+
+      .blue {
+        background: #0000FF;
+      }
+
+      .slateblue {
+        background: #5E5A80;
+      }
+
+      .black {
+        background: #000000;
+      }
+
+        </style>
+        <script type="text/javascript"
+            src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js">
+        </script>
+        <script type="text/javascript"
+            src="http://maps.googleapis.com/maps/api/js?v=3.9&key={{ api_key }}&sensor=false">
+        </script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.timers.min.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/maplabel.min.js"></script>
+        <!-- charts api -->
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript">
+          google.load("visualization", "1", {packages:["imagesparkline"]});
+        </script>
+        <script type="text/javascript">
+            function init_map() {
+                var stylesArray = [
+                    {
+                        featureType: "road",
+                        stylers: [ { visibility: "off" } ]
+                    },{
+                        featureType: "transit",
+                        stylers: [ { visibility: "off" } ]
+                    },{
+                        featureType: "poi",
+                        stylers: [ { visibility: "off" } ]
+                    },{
+                        featureType: "administrative",
+                        stylers: [ { visibility: "on" } ]
+                    },{
+                        featureType: "administrative",
+                        elementType: "labels",
+                        stylers: [ { visibility: "off" } ]
+                    }
+                ];
+                var us = new google.maps.LatLng(38.6,-96.6);
+                var myOptions = {
+                    zoom: 5,
+                    center: us,
+                    mapTypeControl: false,
+                    scaleControl: false,
+                    streetViewControl: false,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                var map = new google.maps.Map($("#map_canvas")[0], myOptions);
+                map.setOptions({styles: stylesArray});
+                var infowindow = new google.maps.InfoWindow();
+                // draw map title as a lable
+                // draw rectangle
+                var sw = new google.maps.LatLng(42.6, -109.6)
+                var ne = new google.maps.LatLng(45.1, -83.1)
+                var marker = new google.maps.Rectangle({
+                    bounds: new google.maps.LatLngBounds(sw, ne),
+                    strokeColor: "#000000",
+                    strokeOpacity: 0.0,
+                    strokeWeight: 1,
+                    fillColor: "#FFFFFF",
+                    fillOpacity: 0.0,
+                    zIndex: 1,
+                    map: map
+                });
+                google.maps.event.addListener(marker, 'click', function() {
+                    //window.open('http://www.cs.arizona.edu/people/yifengl/tbs.html','_blank')
+                    window.open('http://www.arl.wustl.edu/~jdd/NDN/ndnmap_key.html','_blank')
+                    });
+                var label = new MapLabel({
+                    text: 'NDN Testbed',
+                    position: new google.maps.LatLng(45, -96.6),
+                    map: map,
+                    fontSize: 32,
+                    align: 'center',
+                });
+
+// Create the legend and display on the map
+        var legend = document.createElement('div');
+        legend.id = 'legend';
+        var content = [];
+        content.push('<h3>Key(kb/s)</h3>');
+        content.push('<p><div class="color red"></div>>2000</p>');
+        content.push('<p><div class="color orange"></div>1000 - 2000</p>');
+        content.push('<p><div class="color darkblue"></div>500 - 1000</p>');
+        content.push('<p><div class="color blue"></div>250 - 500</p>');
+        content.push('<p><div class="color slateblue"></div>100-250</p>');
+        content.push('<p><div class="color black"></div><100</p>');
+        content.push('<p>For more info, </p>');
+        content.push('<p>click on </p>');
+        content.push('<p>NDN Testbed label</p>');
+//                google.maps.event.addListener(legend, 'click', function() {
+//                    //window.open('http://www.cs.arizona.edu/people/yifengl/tbs.html','_blank')
+//                    window.open('http://www.arl.wustl.edu/~jdd/NDN/ndnmap_key.html','_blank')
+//                    });
+        legend.innerHTML = content.join('');
+        legend.index = 1;
+        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
+
+                return map;
+            }
+            function init_routers(url, map, geocode) {
+                $.getJSON(url, function(routers) {
+                    var bounds = new google.maps.LatLngBounds();
+                    $(routers).each(function() {
+                        var router = geocode[this];
+                        var lat = router.position[0];
+                        var lng = router.position[1];
+                        if (router.backbone == true) {
+                            // draw circle
+                            var marker = new google.maps.Circle({
+                                center: new google.maps.LatLng(lat, lng),
+                                //radius: 50000, // 50 km
+                                radius: 30000, // 50 km
+                                strokeColor: "#000000",
+                                strokeOpacity: 0.75,
+                                strokeWeight: 0.5,
+                                fillColor: "#A73722",
+                                fillOpacity: 0.85,
+                                zIndex: 1,
+                                map: map
+                            });                            
+                            google.maps.event.addListener(marker, 'click', function() {
+                                window.open(router.site,'_blank')
+                                });
+                        } 
+                        else {
+                            // draw rectangle
+                            //var sw = new google.maps.LatLng(lat-0.4, lng-0.5)
+                            //var ne = new google.maps.LatLng(lat+0.4, lng+0.5)
+                            var sw = new google.maps.LatLng(lat-0.25, lng-0.25)
+                            var ne = new google.maps.LatLng(lat+0.25, lng+0.25)
+                            var marker = new google.maps.Rectangle({
+                                bounds: new google.maps.LatLngBounds(sw, ne),
+                                strokeColor: "#000000",
+                                strokeOpacity: 0.5,
+                                strokeWeight: 1,
+                                fillColor: "#52A5C2",
+                                fillOpacity: 1.0,
+                                zIndex: 1,
+                                map: map
+                            });
+                            google.maps.event.addListener(marker, 'click', function() {
+                                window.open(router.site,'_blank')
+                                });
+                        }
+                        var mapLabel = new MapLabel({
+                            text: router.shortname,
+                            //position: new google.maps.LatLng(lat-.5, lng),
+                            position: new google.maps.LatLng(lat-.3, lng),
+                            map: map,
+                            fontSize: 13,
+                            align: 'center',
+                            minZoom: 4,
+                        });
+                        bounds.extend(new google.maps.LatLng(lat, lng));
+                    });
+                    // Zoom To Fit All Markers on Google Maps API v3
+                    // http://blog.shamess.info/2009/09/29/zoom-to-fit-all-markers-on-google-maps-api-v3/
+                    map.fitBounds(bounds);
+                });
+            }
+
+            function init_hosts(url, map, geocode) {
+                $.getJSON(url, function(hosts) {
+                    $(hosts).each(function() {
+                        var host = this;
+                        var router = geocode[host.router]
+                        lat = host.offset[0] + router.position[0]
+                        lng = host.offset[1] + router.position[1]
+                        var marker = new google.maps.Marker({
+                            position: new google.maps.LatLng(lat, lng),
+                            map: map,
+                            icon: "{{ STATIC_URL }}img/triangle.png"
+                        });
+                        var start = router.position
+                        var end = [lat, lng]
+                        var linkCoordinates = [
+                            new google.maps.LatLng(start[0]+.1, start[1]),
+                            new google.maps.LatLng(end[0]+.1, end[1]),
+                        ];
+                        var linkPath = new google.maps.Polyline({
+                        path: linkCoordinates,
+                        strokeColor: "#4592B7",
+                        map: map,
+                        strokeOpacity: 0.6,
+                        strokeWeight: 1
+                        });
+                    });
+                });
+            }
+
+            function set_sparkline(url, id) {
+                $.ajax({
+                    url: "{{ spark_rx_url }}"+link.id,
+                    success: function(json) {
+                        if (google.visualization && google.visualization.DataTable && google.visualization.ImageSparkLine) {
+                            var data = new google.visualization.DataTable(json);
+                            var chart = new google.visualization.ImageSparkLine(document.getElementById(id));
+                            chart.draw(data, {width: 190, height: 63, showAxisLines: false,  showValueLabels: true, labelPosition: 'none'});
+                        }
+                    }
+                });
+            }
+
+            function make_linkinfo(linkPath, link, start, end) {
+                var infowindow = new google.maps.InfoWindow();
+                // Assumptions:
+                //  rx is traffic to link.start
+                //  tx is traffic from link.start; i.e. to link.end
+                var contentString = '<div class="info-content">'+
+                                    '<p class="rx">To <b>'+ start.shortname + '</b>:</p>' +
+                                    '<div id="rx_chart'+ link.id +'" class="link-chart"></div>' +
+                                    '<p class="tx">To <b>'+ end.shortname + '</b>:</p>' +
+                                    '<div id="tx_chart'+ link.id +'" class="link-chart"></div>';
+                google.maps.event.addListener(linkPath, 'click', function(event) {
+                    infowindow.setPosition(event.latLng);
+                    infowindow.setContent(contentString);
+                    infowindow.open(linkPath.map); // open before drawing chart
+                    set_sparkline("{{ spark_rx_url }}"+link.id, 'rx_chart'+link.id);
+                    set_sparkline("{{ spark_tx_url }}"+link.id, 'tx_chart'+link.id);
+                });
+            }
+
+            function init_links(url, map, geocode, link_obj) {
+                $.getJSON(url, function(links) {
+                    var linkColorInactive = "#666666";
+                    // draw links
+                    $(links).each(function() {
+                        var link = this;
+                        var start = geocode[link.start]
+                        var end = geocode[link.end]
+                        var latOffset = 1;
+                        var lngOffset = 0;
+
+                        latOffset = 0; lngOffset = 0;
+
+                        var linkCoordinates = [
+                            new google.maps.LatLng(start.position[0]+.1, start.position[1]),
+                            new google.maps.LatLng(end.position[0]+.1, end.position[1]),
+                        ];
+                        var linkCenterCoordinates = new google.maps.LatLng(
+                            ((start.position[0] + end.position[0])/2)+latOffset,
+                            ((start.position[1] + end.position[1])/2)+lngOffset
+                        );
+
+                        var linkPath = new google.maps.Polyline({
+                            path: linkCoordinates,
+                            strokeColor: linkColorInactive,
+                            map: map,
+                            strokeOpacity: 0.7,
+                            strokeColor: linkColorInactive,
+                            strokeWeight: 4
+                            });
+
+                        // traffic label
+                        var label = new MapLabel({
+                            text: '',
+                            position: linkCenterCoordinates,
+                            map: map,
+                            fontSize: 18,
+                            align: 'center',
+                            });
+
+                        // This is special condition for links like UCLA to PKU (Peking University in Beijing) 
+                        if (start.position[1] < -45.0)  {
+                           if (end.position[1] > 90.0) {
+                             // Below puts the label in the center of the link which is in the middle of the Pacific
+                             label.position = new google.maps.LatLng(label.position.lat(), label.position.lng() + 180.0);
+                             // This puts the label closer to UCLA so we can see it when just looking at US
+                             //label.position = new google.maps.LatLng(label.position.lat()-1.5, start.position[1] - 5.0);
+                             //label.fontSize = 24;
+                           } 
+                        }
+
+                        link_obj[link.id] = {'path':linkPath, 'label':label};
+                        link_obj.query += link.id + '+';
+                    });
+                });
+            }
+
+            function update_links(links, period) {
+                $(document).everyTime(period, function (i) {
+                    $.getJSON("{{ bw_url }}"+links.query, function(data) {
+                        $(data).each(function() {
+                            var link = links[this.id];
+                            // update link label
+                            link.label.set('text', this.rx.toString() + '/' + this.tx.toString());
+
+                            // update link color
+                            var bw = parseFloat(this.rx + this.tx);
+                            if (bw > 2000 ) {
+                                link.path.set('strokeColor', "red");
+                                link.path.set('strokeWeight', "10");
+                            } else if (bw > 1000 ) {
+                                link.path.set('strokeColor', "orange");
+                                link.path.set('strokeWeight', "10");
+                            } else if (bw > 500 ) {
+                                link.path.set('strokeColor', "darkblue");
+                                link.path.set('strokeWeight', "8");
+                            } else if (bw > 250 ) {
+                                link.path.set('strokeColor', "blue");
+                                link.path.set('strokeWeight', "6");
+                            } else if (bw > 100) {
+                                link.path.set('strokeColor', "slateblue");
+                                link.path.set('strokeWeight', "4");
+                            } else {
+                                link.path.set('strokeColor', "black");
+                                link.path.set('strokeWeight', "2");
+                            }
+                        });
+                    }, "json");
+                }, 0);
+            }
+
+            function initialize() {
+                var map = init_map();
+                var link_obj = {query:''};
+
+                $.getJSON("/json/geocode" , function(geocode) {
+                    // add ndn routers
+                    init_routers('/json/routers/', map, geocode);
+                    // add hosts
+                    //init_hosts('/json/hosts/', map, geocode);
+                    // add links
+                    init_links('/json/links/', map, geocode, link_obj);
+                });
+
+                // make periodic job to update all the links
+                update_links(link_obj, {{ bw_update_interval }});
+            }
+        </script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-34296523-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+    </head>
+    <body onload="initialize()">
+        <div id="map_canvas" style="width:100%; height:100%"></div>
+    </body>
+</html>

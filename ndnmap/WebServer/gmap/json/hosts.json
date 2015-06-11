@@ -1,0 +1,141 @@
+[
+    {
+        "router": "UCSD",
+        "offset": [ -1.5, -0.75 ]
+    },
+    {
+        "router": "UCSD",
+        "offset": [ -2, 0 ]
+    },
+    {
+        "router": "UCSD",
+        "offset": [ -1.5, 0.75 ]
+    },
+    {
+        "router": "UCI",
+        "_offset": [ 1, 2 ],
+        "offset": [ 1.25, 0 ]
+    },
+    {
+        "router": "UCI",
+        "_offset": [ 0, 2 ],
+        "offset": [ 1.5, 0.75 ]
+    },
+    {
+        "router": "UCI",
+        "_offset": [ -1, 2 ],
+        "offset": [ 1.25, 1.5 ]
+    },
+    {
+        "router": "UCLA",
+        "offset": [ -1.5, -0.75 ]
+    },
+    {
+        "router": "UCLA",
+        "offset": [ -2, 0 ]
+    },
+    {
+        "router": "UCLA",
+        "offset": [ -1.5, 0.75 ]
+    },
+    {
+        "router": "REMAP",
+        "offset": [ -1.5, -0.75 ]
+    },
+    {
+        "router": "REMAP",
+        "offset": [ -2, 0 ]
+    },
+    {
+        "router": "REMAP",
+        "offset": [ -1.5, 0.75 ]
+    },
+    {
+        "router": "PARC",
+        "offset": [ 1.5, -0.75 ]
+    },
+    {
+        "router": "PARC",
+        "offset": [ 2, 0 ]
+    },
+    {
+        "router": "PARC",
+        "offset": [ 1.5, 0.75 ]
+    },
+    {
+        "router": "UA",
+        "offset": [ -1.5, -0.75 ]
+    },
+    {
+        "router": "UA",
+        "offset": [ -2, 0 ]
+    },
+    {
+        "router": "UA",
+        "offset": [ -1.5, 0.75 ]
+    },
+    {
+        "router": "CSU",
+        "offset": [ 1.5, -0.75 ]
+    },
+    {
+        "router": "CSU",
+        "offset": [ 2, 0 ]
+    },
+    {
+        "router": "CSU",
+        "offset": [ 1.5, 0.75 ]
+    },
+    {
+        "router": "UM",
+        "offset": [ -1.5, -0.75 ]
+    },
+    {
+        "router": "UM",
+        "offset": [ -2, 0 ]
+    },
+    {
+        "router": "UM",
+        "offset": [ -1.5, 0.75 ]
+    },
+    {
+        "router": "WU",
+        "offset": [ -1, 3 ]
+    },
+    {
+        "router": "WU",
+        "offset": [ -1.25, 2 ]
+    },
+    {
+        "router": "WU",
+        "offset": [ -1, 1 ]
+    },
+    {
+        "router": "UIUC",
+        "offset": [ 1.5, -0.75 ]
+    },
+    {
+        "router": "UIUC",
+        "offset": [ 2, 0 ]
+    },
+    {
+        "router": "UIUC",
+        "offset": [ 1.5, 0.75 ]
+    },
+    {
+        "router": "NEU",
+        "offset": [ 1.5, -0.75 ]
+    },
+    {
+        "router": "NEU",
+        "offset": [ 2, 0 ]
+    },
+    {
+        "router": "NEU",
+        "offset": [ 1.5, 0.75 ]
+    },
+    {
+        "router": "PKU",
+        "offset": [ 1.5, 0.75 ]
+    }
+]

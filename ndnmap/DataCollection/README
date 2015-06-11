@@ -1,0 +1,6 @@
+This directory contains the scripts which collect
+data from the NDN testbed nodes to be displayed on
+the ndnmap.arl.wustl.edu web page.
+To collect the data run the RUNALL.sh script.
+It will start all the other necessary scripts.
+The scripts are written to re-run if something dies.
